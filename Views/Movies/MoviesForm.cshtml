@@ -1,0 +1,30 @@
+﻿@model EXercises.ViewModels.NewMoviesViewModels
+
+@{
+    ViewBag.Title = "MoviesForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>New Movies</h2>
+@using (Html.BeginForm("Save", "Movies"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.movies.Name)
+        @Html.TextBoxFor(m => m.movies.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="movies.ReleaseDate"> Relased Date  </label>
+        @Html.TextBoxFor(m => m.movies.ReleaseDate, "{0: d MMM yyyy }", new { @class = "form-control" })
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.movies.GenreMoviesId)
+        @Html.DropDownListFor(m => m.movies.GenreMoviesId, new SelectList(Model.genreMovies, "Id", "Name"), "Select Genre Movies ", new { @class = "form-control" })
+    </div>
+        
+    <div class="form-group">
+        @Html.LabelFor(m => m.movies.NumberInStocks)
+        @Html.TextBoxFor(m => m.movies.NumberInStocks, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(m => m.movies.Id)
+    <button type="submit" class="btn btn-primary">Submit</button>
+}

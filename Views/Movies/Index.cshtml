@@ -1,0 +1,32 @@
+﻿@model IEnumerable<EXercises.Models.Movies>
+
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Customers</h2>
+@if (!Model.Any())
+{
+    <p>We don't have any Movies yet.</p>
+}
+else
+{
+    @Html.ActionLink("New Movie", "New", "Movies", null, new { @class = "btn btn-primary btn-lg" })
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Movies</th>
+                <th>Genre</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var movies in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(movies.Name, "Edit", "Movies", new { id = movies.Id }, null)</td>
+                   <td>@movies.GenreMovies.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
