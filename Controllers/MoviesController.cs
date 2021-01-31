@@ -36,8 +36,18 @@ namespace EXercises.Controllers
             return View("MoviesForm", viewModel);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movies movies)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new NewMoviesViewModels
+                {
+                    movies = movies,
+                    genreMovies = _context.genreMovies.ToList()
+                };
+                return View("MoviesForm", viewModel);
+            }
             if (movies.Id == 0)
             {
                 movies.DateAdded = DateTime.Now;

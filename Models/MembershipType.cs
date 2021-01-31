@@ -11,7 +11,9 @@ namespace EXercises.Models
         public short SignUPFee { get; set; }
         public byte DurationInMonths { get; set; }
         public byte DiscountRate { get; set; }
-
         public string Name { get; set; }
+
+        public static readonly byte UnKnown = 0;
+        public static readonly byte PayAsYouGO = 1;
     }
 }

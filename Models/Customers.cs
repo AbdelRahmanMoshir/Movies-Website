@@ -7,7 +7,7 @@ namespace EXercises.Models
 {
     public class Customers
     {
-        [Required]
+        [Required(ErrorMessage = "Please Enter Your Name")]
         [StringLength(255)]
         public string Name { get; set; }
 
@@ -18,7 +18,8 @@ namespace EXercises.Models
         public MembershipType MembershipType { get; set; }
         [Display(Name ="Membership Type")]
         public byte MembershipTypeId { get; set; }
-        
+
+        [Min18YearIfAMenmber]
         public DateTime? Birthdate { get; set; }
     }
 }

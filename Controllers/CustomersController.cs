@@ -30,14 +30,25 @@ namespace EXercises.Controllers
             var Membership = _context.MembershipTypes.ToList();
             var viewModel = new NewCustomerViewModels
             {
+                Customer = new Customers(),
                 MembershipType = Membership
 
             };
             return View("CustomerForm",viewModel);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customers customer)
         {
+            if(!ModelState.IsValid)
+            {
+                var viewModel = new NewCustomerViewModels
+                {
+                    Customer = customer,
+                    MembershipType = _context.MembershipTypes.ToList()
+                };
+                return View("CustomerForm", viewModel);
+            }
             if( customer.Id == 0)
             _context.customers.Add(customer);
             else
